@@ -13,7 +13,21 @@
 		<p id="p3"></p>
 		<label id="myLabel">Enter your name: </label><br>
 		<input type="text" id="myText"><br>
-		<button type="button" id="myButton">Submit</button>
+		<button type="button" id="myButton">Submit</button><br>
+		<!-- Check boxes -->
+		<label for="myCheckbox">Subscribe</label>
+		<input type="checkbox" id="myCheckbox"><br>
+
+		<!-- RADIO BUTTONS -->
+		<!-- if in same group (name), you'll only be able to select 1 button -->
+		<label for="visaBtn">Visa</label>
+		<input type="radio" name="card" id="visaBtn">
+		<label for="mastercardBtn">MasterCard</label>
+		<input type="radio" name="card" id="mastercardBtn">
+		<label for="paypalBtn">PayPal</label>
+		<input type="radio" name="card" id="paypalBtn"><br>
+
+		<button id="myButton2">Submit</button>
 		<script src="index.js"></script>
 	</body>
 </html>

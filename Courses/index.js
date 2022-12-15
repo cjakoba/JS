@@ -165,3 +165,262 @@ console.log(randomrangeint);
 console.log(randomstartint);
 
 
+/*
+	USEFUL STRING PROPERTIES AND METHODS ===========================================================================
+*/
+let username2 = "Christian Jakob     ";
+console.log(username2);
+// Get the length of a string in characters with .length property
+console.log(username2.length);
+// Get the character from the string at a specific index
+console.log(username2.charAt(0));
+// Get the index of the first occurance of a specific char (starting with 0)
+console.log(username2.indexOf("a"));
+// Get the index of the LASR occurance of a specific char
+console.log(username2.lastIndexOf("a"));
+// Trim spaces before and after a string
+username2 = username2.trim();
+console.log(username2);
+// All uppercase
+console.log(username2.toUpperCase());
+// All lowercase
+console.log(username2.toLowerCase());
+
+// Replace all specific character with another character
+let phoneNumber = "123-456-7890";
+console.log(phoneNumber);
+phoneNumber = phoneNumber.replaceAll("-", "/"); // 1st to replace, 2nd to replace with
+console.log(phoneNumber);
+
+// slice() - extracts a section of a string and return it as a new string without modifying the original string
+// this works very well with indexOf() to calculate where to split strings based on a spcific character (ie. spaces)
+let fullName = "Christian Jakob";
+let firstName2;
+let lastName2;
+
+lastName2 = fullName.slice(10); // Start at index 10, go to end of string
+console.log(lastName2);
+firstName2 = fullName.slice(0, 9); // Starting index, ending index (noninclusive)
+console.log(firstName2);
+	
+	
+/*
+	METHOD CHAINING ======================================================================================================
+*/
+// After calling 1 method, you can call other methods
+// Makes code cleaner and more readable
+let userName3 = "Christian      ";
+let letter = userName3.charAt(0).toUpperCase().trim();
+console.log(letter);
+	
+	
+/*
+	IF STATEMENTS =========================================================================================================
+*/
+// Self-explainatory based on previous experience in other languages.
+let age2 = 65;
+
+// Note that this prints incorrect logic, since when a statement is true to terminates the rest of the checking
+// The correct way would be to put senior citizen checking first.
+if (age2 >= 18) {
+	console.log("You are an adult!");
+} else if (age2 < 0) {
+	console.log("You haven't been born yet!");
+} else if (age2 >= 65) {
+	console.log("You are a senior citizen!");
+} else {
+	console.log("You are a child!");
+}
+
+// With booleans you can just place them directly as the logic
+let online = true;
+if (online) {
+	console.log("You are online!");
+} else {
+	console.log("You are offline!");
+}
+	
+
+/*
+	CHECKED PROPERTY & LOGIC ===================================================================================================
+*/
+// When we click on the button, see if the checkbox is checked or not
+document.getElementById("myButton2").onclick = function() {
+	// Can store elements within a variable for readability
+	const myCheckbox = document.getElementById("myCheckbox");
+	const visaBtn = document.getElementById("visaBtn");
+	const mastercardBtn = document.getElementById("mastercardBtn");
+	const paypalBtn = document.getElementById("paypalBtn");
+
+	if (myCheckbox.checked) {
+		console.log("You are subscribed!");
+	} else {
+		console.log("You are not subscribed!");
+	}
+
+	if (visaBtn.checked) {
+		console.log("You are paying with a Visa!");
+	} else if (mastercardBtn.checked) {
+		console.log("You are paying with a MasterCard!");
+	} else if (paypalBtn.checked) {
+		console.log("You are paying with PayPal!");
+	} else {
+		console.log("You must select a payment type!");
+	}
+}
+
+
+/*
+	SWITCH STATEMENTS ============================================================================================================
+*/
+// If you find yourself using a whole bunch of switch statements, it may actually be better to just use a switch statement.	
+// You can use all the same logic compound prepositions that if statements can do (ie. x >= y, etc).
+let grade = "A";
+
+switch (grade) {
+	case "A":
+		console.log("You did great!");
+		break;
+	case "B":
+		console.log("You did good!");
+		break;
+	case "C":
+		console.log("You did okay!");
+		break;
+	case "D":
+		console.log("You passed... barely!");
+		break;
+	case "F":
+		console.log("You FAILED!");
+		break;
+	default:
+		console.log(grade, "is not a letter grade!");
+}
+	
+
+/*
+	 AND + OR OPERATORS ============================================================================================================
+*/
+// With && both conditions must be true (allows you to check more than 1 condition)
+// With || either condition can be true 
+// Theres also the ! (NOT) logical operator
+let temp = 15;
+if (temp > 0 && temp < 30) {
+	console.log("The weather is good!");
+} else {
+	console.log("The weather is bad!");
+}
+if (temp <= 0 || temp >= 30) {
+	console.log("The weather is good!");
+} else {
+	console.log("The weather is bad!");
+}
+
+
+/*
+	 WHILE LOOPS =================================================================================================================
+*/
+let userName4 = "";
+// Wont let you hit okay on the prompt unless you type something in
+while (userName4 == "" || userName4 == null) {
+	userName4 = window.prompt("Enter your name");
+}
+	
+
+/*
+	 DO WHILE LOOPS =================================================================================================================
+*/
+let userName5 = "";
+do {
+	userName5 = window.prompt("Enter your name for the do while loop!");
+} while (userName5 == "");
+
+	
+/*
+	 FOR LOOPS =======================================================================================================================
+*/
+// Self explainatory from previous experience
+// For loop are more suitable if you need to exectue code a *certain* amount of times
+// Counter is a local variable - does NOT exist outside the for loop
+// unless you first declare it outside the loop
+for (let counter = 1; counter <= 10; counter++) {
+	console.log(counter);
+}
+
+
+/*
+	 BREAK AND CONTINUE =================================================================================================================
+*/
+// break - breaks out of a loop entirely
+// continue - skips an iteration of a loop
+for (let i = 1; i <= 20; i++) {
+	if (i == 10) {
+		continue; // Skips that specific iteration of a loop
+	}
+	if (i == 13) {
+		break; // Breaks out of a loop completely
+	}
+	console.log(i);
+}
+
+
+/*
+	 FUNCTIONS ===========================================================================================================================
+*/
+// Functions have access to global variables.
+// Global variables are variables declared outside any set of curly braces or functions
+// Functions can return values as well
+let number1;
+
+number1 = startProgram();
+
+function startProgram() {
+	let userName = "Christian";
+	happyBirthday(userName);
+	return 10;
+}
+
+function happyBirthday(userName) {
+	console.log("Happy birthday", userName.trim(), "im a function!");
+}
+
+console.log(number1);
+
+
+/*
+	 TERNARY OPERATOR =====================================================================================================================
+*/
+// condition ? expression if true : expression if false
+console.log(5 > 10 ? "10 is greater than 5" : "5 is not greater than 10");
+
+
+/*
+	 LET VS VAR SCOPES =====================================================================================================================
+*/
+// This is an important unit
+// let is limited to block scope {}
+// var is limited to a function() {}
+// If you decalre a global variable with var, it can mess with your browser properties (not good!)
+
+
+/*
+	 TEMPLATE LITERALS =====================================================================================================================
+*/
+// basically like C's printf or javas System.out.printf, except here its with back ticks and ${}
+// can use this to assign variables too
+// This is especially useful when updating html elements
+let userName6 = "Bob";
+let items = 3;
+let total = 75;
+
+console.log(`Hello ${userName6}, you have ${items} in your cart for a total of $${total}`);
+
+
+
+
+
+
+
+
+
+
