@@ -367,31 +367,141 @@ for (let i = 1; i <= 20; i++) {
 /*
 	 FUNCTIONS ===========================================================================================================================
 */
+// 1. delcare the function (function name())
 // Functions have access to global variables.
 // Global variables are variables declared outside any set of curly braces or functions
-// Functions can return values as well
+// Functions can return values as well using a return statement
+// They can only return 1 value.
+// *** Functions always return, even when you dont write out a return statement, they return undefined by default.
+	// Undefined is a built-in JS value which means no value specified
+// Functions break the top-to-bottom flow of code execution, as javascript has to jump into a function, execute the
+// function, then jump out of the function where it was
 let number1;
 
 number1 = startProgram();
 
+// In programming, Scope is the context in which values are visible or can be referenced.
+// Functions can access the global scope and change the values.
+// Making functions dependent on global variables make those functions and variables harder to use, keep track of, or reuse elsewhere.
+// Function comments and descriptions (this is similar to how java does it), this uses JSDoc Comments, and an generate HTML files
+
+/**
+ * [A short description of the function]
+ * @returns {[return type] [documents the function's return value]}
+ */
 function startProgram() {
 	let userName = "Christian";
 	happyBirthday(userName);
-	return 10;
+	return 10; // return statement, causes the JS engine to exit the function immediately
 }
 
+// Browser reads the function into memory and is now prepared to act on its instructions as soon as its called.
+// Can add parameters to your function declaration to have functions take in arguments passed in.
+	// parameters are variables in which the function stores information passed to it.
+	// arguments are values that you pass to a function when you call the function.
 function happyBirthday(userName) {
 	console.log("Happy birthday", userName.trim(), "im a function!");
 }
 
 console.log(number1);
 
+/**
+* Returns a random number between two  
+* @param {number} upper - The highest number value.
+* @param {number} lower - The lowest number value.
+* @return {number} The random number value. 
+*/
+const randValWithBounds = (upper = 100, lower = 1) => {
+	// isNaN - special function that return a boolean value 
+	if (isNaN(upper) || isNaN(lower)) {
+		// JS lets you create your own errors that prints to the JS console
+		// throw keyword followed by JS Error object...
+		throw Error("Both arguments must be numbers!");
+	}
+	const randomNumber = Math.floor(Math.random() * (upper - lower + 1)) + lower;
+	return randomNumber;
+};
 
 /*
-	 TERNARY OPERATOR =====================================================================================================================
+	 FUNCTION EXPRESSIONS ===============================================================================================================
 */
+// This lets you assign a function to a variable
+// This function can be rewritten
+function getRandomNumber(upper) {
+	const randomNumber = Math.floor(Math.random() * upper) + 1;
+	return randomNumber;
+}
+// As:
+const getRandomNumber2 = function (upper) {
+	const randomNumber = Math.floor(Math.random() * upper) + 1;
+	return randomNumber;
+};
+// This is known as an Anonymous Function as it has no name, instead the name comes from the variable
+// You store the function as a vaule in the variable
+console.log(`Anon function value ${getRandomNumber2(10)}...`);
+
+// Differences between function declarations and function expressions:
+// declarations load before any JS code is executed, so their calls can be before their declaration statement.
+// When the JS file loads, the JS engine behind the scene moves all function declarations to the top of their current scope.
+// This is known as hoisting.
+// Function expressions dont have this feature, so you can't call it before its initialized.
+// These approaches are personal preference.
+
+
+/* TERNARY OPERATOR ===================================================================================================================== */
 // condition ? expression if true : expression if false
 console.log(5 > 10 ? "10 is greater than 5" : "5 is not greater than 10");
+
+
+/*
+	 ARROW FUNCTION EXPRESSIONS ==========================================================================================================
+*/
+// Basic syntax: const square = (x) => {return x*x;};
+// Omit the function keyword.
+// => is the arrow token.
+// Arrow function are still anonymous functions
+// These behave mostly like function expressions and are not hoisted to the top of the scope by the JS engine.
+const getRandomNumber3 = (upper) => {
+	const randomNumber = Math.floor(Math.random() * upper) + 1;
+	return randomNumber;
+};
+
+
+/*
+	 CONSISE ARROW FUNCTION EXPRESSIONS ==================================================================================================
+*/
+// If the function accepts only 1 argument, you can omit the parenthesis...
+	// Example: const square = x => {return x*x;}
+// You cant remove parenthesis from arrow function requiring no or multiple arguments. Only single arguments.
+
+// If the function body is only 1 line of code, you can omit the return keyword and the curly braces...
+	// Example: const square = x => x * x;
+// This is called an implicit return - returned automatically.
+
+// Can implicity return larger functions multiline 
+	// Example: const square = (x) => (
+		// x * x;
+	//);
+
+// Single-line functions with No parameters
+// A single-ling arrow function with no parameters requires parenthesis before the arrow token or youll get an error
+	// Example: const greeting = () => alert("Hello!");
+
+
+/*
+	 DEFAULT FUNCTION PARAMETERS ==================================================================================================
+*/
+// Can write this as an arrow expression as well...
+function sayGreeting(name = "Student") {
+	return `Good morning, ${name}!`;
+}
+
+// Note, if you have two default parameters and you only want to pass in 1 name argument, you have to
+// pass in undefined for the first parameter or youll get an error.
+// Everything but the last argument requires undefined...
+function sayGreeting2(greeting = "Morning", name = "Student") {
+	return `${greeting}, ${name}!`;
+}
 
 
 /*
@@ -416,9 +526,61 @@ let total = 75;
 console.log(`Hello ${userName6}, you have ${items} in your cart for a total of $${total}`);
 
 
+/*
+	 TOLOCALESTRING ========================================================================================================================
+*/
+// 2 arguments: 1. locale - language, if undefined becames set as browsers default; 2. options - formatting options
+// NUMBERS
+let myNum = 123456.789;
+myNum = myNum.toLocaleString("en-US"); // US English - prints 123,456.789
+console.log(myNum);
+myNum = myNum.toLocaleString("hi-IN"); // Does NOT convert to hindi because it was already converted to english
+let myNum2 = 123456.789;
+myNum2 = myNum2.toLocaleString("hi-IN"); // Hindi
+console.log(myNum2); // Hindi - prints 1,23,456.789
+let myNum3 = 123456.789;
+myNum3 = myNum3.toLocaleString("de-DE"); // German
+console.log(myNum3); // German - prints 123.456,789
+
+// CURRENCY
+let myNum4 = 100.355;
+myNum4 = myNum4.toLocaleString("en-US", {style: "currency", currency: "USD"}); // Rounds to dollars and cents US dollars
+console.log(myNum4);
+let myNum5 = 100.355;
+myNum5 = myNum5.toLocaleString("hi-IN", {style: "currency", currency: "INR"}); // Rounds - hindi currency
+console.log(myNum5);
+
+// PERCENTS
+let myNum6 = 0.5; // 50%
+myNum6 = myNum6.toLocaleString(undefined, {style: "percent"}); // print as percentile
+console.log(myNum6);
+
+// UNITS - celsius, km, miles, F, etc
+let myNum7 = 100;
+myNum7 = myNum7.toLocaleString(undefined, {style: "unit", unit: "celsius"}); // print with degree symbol
+console.log(myNum7);
 
 
+/*
+	 ARRAYS =================================================================================================================================
+*/
+let fruits = ["apple", "orange", "banana"];
+console.log(fruits);
+fruits[2] = "coconut";
+console.log(fruits);
+fruits.push("lemon"); // add an element
+console.log(fruits);
+fruits.pop(); // remove last element
+console.log(fruits);
+fruits.unshift("mango"); // add element to beginning
+console.log(fruits);
+fruits.shift(); // removes element from beginning 
+console.log(fruits);
 
+let len_array = fruits.length;
+let index_array = fruits.indexOf("apple"); // returns an index of -1 if not found!
+console.log(len_array);
+console.log(index_array);
 
 
 
