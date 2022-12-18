@@ -41,3 +41,35 @@ for (let i = 0; i < 10; i++) {
 		break;
 	}
 }
+
+
+// FOR IN Loop for looping through an object's properties - must use bracket notation []
+const person = {
+	name: "Edward",
+	nickname: "Duke", 
+	city: "New York",
+	age: 37,
+	isStudent: true,
+	skills: ["JavaScript", "HTML", "CSS"]
+};
+
+for (let property in person) {
+	console.log(`${property}: ${person[property]}`);
+}
+
+// Can merge object with spread operator ...
+	// const example = {
+	    //...name,
+		//...role
+    // };
+
+// Object.values() is a method that returns an array of a given object's property values.
+// Object.keys() is a method that returns an array containing the property names (or keys).
+// To check the length of an object: Object.keys(person).length would work
+
+
+
+
+
+
+
