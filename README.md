@@ -21,3 +21,9 @@ Libraries:
 - JQuery - provides a richer interaction with the DOM.
 
 JS is a dynamic programming language ran in browser that have JavaScript engines. Other non-browser environments in which JS runs includes: Node.js.
+
+Almost everything in JS is or can be treated as an object. They have properties and methods. The DOM is an object-based representation of a webpage with its own built-in properties and methods. DOM represents HTML documents in tree-like structures. Every element or item is a node. DOM allows you to dynamically change web pages. Note that pseudo-elements like ::before or ::after are not considered part of the actual DOM.
+
+The browser has a global object known as the window object.
+
+Interactivity with JS involves selecting elements, manipulating elements, and listening for user actions.
